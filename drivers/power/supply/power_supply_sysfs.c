@@ -99,8 +99,7 @@ static const char * const power_supply_typec_src_rp_text[] = {
 };
 
 static ssize_t power_supply_show_usb_type(struct device *dev,
-					  enum power_supply_usb_type *usb_types,
-					  ssize_t num_usb_types,
+					  const struct power_supply_desc *desc,
 					  union power_supply_propval *value,
 					  char *buf)
 {
@@ -109,8 +108,8 @@ static ssize_t power_supply_show_usb_type(struct device *dev,
 	bool match = false;
 	int i;
 
-	for (i = 0; i < num_usb_types; ++i) {
-		usb_type = usb_types[i];
+	for (i = 0; i < desc->num_usb_types; ++i) {
+		usb_type = desc->usb_types[i];
 
 		if (value->intval == usb_type) {
 			count += sprintf(buf + count, "[%s] ",
@@ -186,8 +185,7 @@ static ssize_t power_supply_show_property(struct device *dev,
 			      power_supply_type_text[value.intval]);
 		break;
 	case POWER_SUPPLY_PROP_USB_TYPE:
-		ret = power_supply_show_usb_type(dev, psy->desc->usb_types,
-						 psy->desc->num_usb_types,
+		ret = power_supply_show_usb_type(dev, psy->desc,
 						 &value, buf);
 		break;
 	case POWER_SUPPLY_PROP_SCOPE:
