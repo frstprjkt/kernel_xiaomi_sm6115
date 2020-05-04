@@ -35,61 +35,125 @@ struct power_supply_attr {
 }
 
 static const char * const power_supply_type_text[] = {
-	"Unknown", "Battery", "UPS", "Mains", "USB",
-	"USB_DCP", "USB_CDP", "USB_ACA", "USB_C",
-	"USB_PD", "USB_PD_DRP", "BrickID",
-	"USB_HVDCP", "USB_HVDCP_3", "USB_HVDCP_3P5", "Wireless", "USB_FLOAT",
-	"BMS", "Parallel", "Main", "USB_C_UFP", "USB_C_DFP",
-	"Charge_Pump",
+	[POWER_SUPPLY_TYPE_UNKNOWN]		= "Unknown",
+	[POWER_SUPPLY_TYPE_BATTERY]		= "Battery",
+	[POWER_SUPPLY_TYPE_UPS]			= "UPS",
+	[POWER_SUPPLY_TYPE_MAINS]		= "Mains",
+	[POWER_SUPPLY_TYPE_USB]			= "USB",
+	[POWER_SUPPLY_TYPE_USB_DCP]		= "USB_DCP",
+	[POWER_SUPPLY_TYPE_USB_CDP]		= "USB_CDP",
+	[POWER_SUPPLY_TYPE_USB_ACA]		= "USB_ACA",
+	[POWER_SUPPLY_TYPE_USB_TYPE_C]		= "USB_C",
+	[POWER_SUPPLY_TYPE_USB_PD]		= "USB_PD",
+	[POWER_SUPPLY_TYPE_USB_PD_DRP]		= "USB_PD_DRP",
+	[POWER_SUPPLY_TYPE_APPLE_BRICK_ID]	= "BrickID",
+	[POWER_SUPPLY_TYPE_USB_HVDCP]		= "USB_HVDCP",
+	[POWER_SUPPLY_TYPE_USB_HVDCP_3]		= "USB_HVDCP_3",
+	[POWER_SUPPLY_TYPE_USB_HVDCP_3P5]	= "USB_HVDCP_3P5",
+	[POWER_SUPPLY_TYPE_WIRELESS]		= "Wireless",
+	[POWER_SUPPLY_TYPE_USB_FLOAT]		= "USB_FLOAT",
+	[POWER_SUPPLY_TYPE_BMS]			= "BMS",
+	[POWER_SUPPLY_TYPE_PARALLEL]		= "Parallel",
+	[POWER_SUPPLY_TYPE_MAIN]		= "Main",
+	[POWER_SUPPLY_TYPE_UFP]			= "USB_C_UFP",
+	[POWER_SUPPLY_TYPE_DFP]			= "USB_C_DFP",
+	[POWER_SUPPLY_TYPE_CHARGE_PUMP]		= "Charge_Pump",
 };
 
 static const char * const power_supply_usb_type_text[] = {
-	"Unknown", "SDP", "DCP", "CDP", "ACA", "C",
-	"PD", "PD_DRP", "PD_PPS", "BrickID"
+	[POWER_SUPPLY_USB_TYPE_UNKNOWN]		= "Unknown",
+	[POWER_SUPPLY_USB_TYPE_SDP]		= "SDP",
+	[POWER_SUPPLY_USB_TYPE_DCP]		= "DCP",
+	[POWER_SUPPLY_USB_TYPE_CDP]		= "CDP",
+	[POWER_SUPPLY_USB_TYPE_ACA]		= "ACA",
+	[POWER_SUPPLY_USB_TYPE_C]		= "C",
+	[POWER_SUPPLY_USB_TYPE_PD]		= "PD",
+	[POWER_SUPPLY_USB_TYPE_PD_DRP]		= "PD_DRP",
+	[POWER_SUPPLY_USB_TYPE_PD_PPS]		= "PD_PPS",
+	[POWER_SUPPLY_USB_TYPE_APPLE_BRICK_ID]	= "BrickID",
 };
 
 static const char * const power_supply_status_text[] = {
-	"Unknown", "Charging", "Discharging", "Not charging", "Full"
+	[POWER_SUPPLY_STATUS_UNKNOWN]		= "Unknown",
+	[POWER_SUPPLY_STATUS_CHARGING]		= "Charging",
+	[POWER_SUPPLY_STATUS_DISCHARGING]	= "Discharging",
+	[POWER_SUPPLY_STATUS_NOT_CHARGING]	= "Not charging",
+	[POWER_SUPPLY_STATUS_FULL]		= "Full",
 };
 
 static const char * const power_supply_charge_type_text[] = {
-	"Unknown", "N/A", "Trickle", "Fast", "Taper"
+	[POWER_SUPPLY_CHARGE_TYPE_UNKNOWN]	= "Unknown",
+	[POWER_SUPPLY_CHARGE_TYPE_NONE]		= "N/A",
+	[POWER_SUPPLY_CHARGE_TYPE_TRICKLE]	= "Trickle",
+	[POWER_SUPPLY_CHARGE_TYPE_FAST]		= "Fast",
+	[POWER_SUPPLY_CHARGE_TYPE_TAPER]	= "Taper",
 };
 
 static const char * const power_supply_health_text[] = {
-	"Unknown", "Good", "Overheat", "Dead", "Over voltage",
-	"Unspecified failure", "Cold", "Watchdog timer expire",
-	"Safety timer expire", "Over current", "Warm", "Cool", "Hot"
+	[POWER_SUPPLY_HEALTH_UNKNOWN]		    = "Unknown",
+	[POWER_SUPPLY_HEALTH_GOOD]		    = "Good",
+	[POWER_SUPPLY_HEALTH_OVERHEAT]		    = "Overheat",
+	[POWER_SUPPLY_HEALTH_DEAD]		    = "Dead",
+	[POWER_SUPPLY_HEALTH_OVERVOLTAGE]	    = "Over voltage",
+	[POWER_SUPPLY_HEALTH_UNSPEC_FAILURE]	    = "Unspecified failure",
+	[POWER_SUPPLY_HEALTH_COLD]		    = "Cold",
+	[POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE] = "Watchdog timer expire",
+	[POWER_SUPPLY_HEALTH_SAFETY_TIMER_EXPIRE]   = "Safety timer expire",
+	[POWER_SUPPLY_HEALTH_OVERCURRENT]	    = "Over current",
+	[POWER_SUPPLY_HEALTH_WARM]		    = "Warm",
+	[POWER_SUPPLY_HEALTH_COOL]		    = "Cool",
+	[POWER_SUPPLY_HEALTH_HOT]		    = "Hot",
 };
 
 static const char * const power_supply_technology_text[] = {
-	"Unknown", "NiMH", "Li-ion", "Li-poly", "LiFe", "NiCd",
-	"LiMn"
+	[POWER_SUPPLY_TECHNOLOGY_UNKNOWN]	= "Unknown",
+	[POWER_SUPPLY_TECHNOLOGY_NiMH]		= "NiMH",
+	[POWER_SUPPLY_TECHNOLOGY_LION]		= "Li-ion",
+	[POWER_SUPPLY_TECHNOLOGY_LIPO]		= "Li-poly",
+	[POWER_SUPPLY_TECHNOLOGY_LiFe]		= "LiFe",
+	[POWER_SUPPLY_TECHNOLOGY_NiCd]		= "NiCd",
+	[POWER_SUPPLY_TECHNOLOGY_LiMn]		= "LiMn",
 };
 
 static const char * const power_supply_capacity_level_text[] = {
-	"Unknown", "Critical", "Low", "Normal", "High", "Full"
+	[POWER_SUPPLY_CAPACITY_LEVEL_UNKNOWN]	= "Unknown",
+	[POWER_SUPPLY_CAPACITY_LEVEL_CRITICAL]	= "Critical",
+	[POWER_SUPPLY_CAPACITY_LEVEL_LOW]	= "Low",
+	[POWER_SUPPLY_CAPACITY_LEVEL_NORMAL]	= "Normal",
+	[POWER_SUPPLY_CAPACITY_LEVEL_HIGH]	= "High",
+	[POWER_SUPPLY_CAPACITY_LEVEL_FULL]	= "Full",
 };
 
 static const char * const power_supply_scope_text[] = {
-	"Unknown", "System", "Device"
+	[POWER_SUPPLY_SCOPE_UNKNOWN]	= "Unknown",
+	[POWER_SUPPLY_SCOPE_SYSTEM]	= "System",
+	[POWER_SUPPLY_SCOPE_DEVICE]	= "Device",
 };
 
 static const char * const power_supply_usbc_text[] = {
-	"Nothing attached", "Sink attached", "Powered cable w/ sink",
-	"Debug Accessory", "Audio Adapter", "Powered cable w/o sink",
-	"Source attached (default current)",
-	"Source attached (medium current)",
-	"Source attached (high current)",
-	"Non compliant",
+	[POWER_SUPPLY_TYPEC_NONE] 			= "Nothing attached",
+	[POWER_SUPPLY_TYPEC_SINK] 			= "Sink attached",
+	[POWER_SUPPLY_TYPEC_SINK_POWERED_CABLE] 	= "Powered cable w/ sink",
+	[POWER_SUPPLY_TYPEC_SINK_DEBUG_ACCESSORY] 	= "Debug Accessory",
+	[POWER_SUPPLY_TYPEC_SINK_AUDIO_ADAPTER] 	= "Audio Adapter",
+	[POWER_SUPPLY_TYPEC_POWERED_CABLE_ONLY] 	= "Powered cable w/o sink",
+	[POWER_SUPPLY_TYPEC_SOURCE_DEFAULT] 		= "Source attached (default current)",
+	[POWER_SUPPLY_TYPEC_SOURCE_MEDIUM] 		= "Source attached (medium current)",
+	[POWER_SUPPLY_TYPEC_SOURCE_HIGH] 		= "Source attached (high current)",
+	[POWER_SUPPLY_TYPEC_NON_COMPLIANT] 		= "Non compliant",
 };
 
 static const char * const power_supply_usbc_pr_text[] = {
-	"none", "dual power role", "sink", "source"
+	[POWER_SUPPLY_TYPEC_PR_NONE] 	= "none",
+	[POWER_SUPPLY_TYPEC_PR_DUAL] 	= "dual power role",
+	[POWER_SUPPLY_TYPEC_PR_SINK] 	= "sink",
+	[POWER_SUPPLY_TYPEC_PR_SOURCE] 	= "source",
 };
 
 static const char * const power_supply_typec_src_rp_text[] = {
-	"Rp-Default", "Rp-1.5A", "Rp-3A"
+	[POWER_SUPPLY_TYPEC_SRC_RP_STD] 	= "Rp-Default",
+	[POWER_SUPPLY_TYPEC_SRC_RP_1P5A] 	= "Rp-1.5A",
+	[POWER_SUPPLY_TYPEC_SRC_RP_3A] 		= "Rp-3A",
 };
 
 static struct power_supply_attr power_supply_attrs[] = {
