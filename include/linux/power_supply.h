@@ -380,6 +380,7 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_MANUFACTURER,
 	POWER_SUPPLY_PROP_BATTERY_TYPE,
 	POWER_SUPPLY_PROP_CYCLE_COUNTS,
+	POWER_SUPPLY_PROP_QUICK_CHARGE_TYPE,
 	/*
 	 * Add local extensions for properties with string values between
 	 * MODEL_NAME and SERIAL_NUMBER. Don't add below SERIAL_NUMBER.
@@ -456,6 +457,15 @@ enum power_supply_typec_power_role {
 	POWER_SUPPLY_TYPEC_PR_DUAL,
 	POWER_SUPPLY_TYPEC_PR_SINK,
 	POWER_SUPPLY_TYPEC_PR_SOURCE,
+};
+
+enum power_supply_quick_charge_type {
+	QUICK_CHARGE_NORMAL = 0,		/* Charging Power <= 10W */
+	QUICK_CHARGE_FAST,			/* 10W < Charging Power <= 20W */
+	QUICK_CHARGE_FLASH,			/* 20W < Charging Power <= 30W */
+	QUICK_CHARGE_TURBE,			/* 30W < Charging Power <= 50W */
+	QUICK_CHARGE_SUPER,			/* Charging Power > 50W */
+	QUICK_CHARGE_MAX,
 };
 
 enum power_supply_notifier_events {
