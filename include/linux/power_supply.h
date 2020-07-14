@@ -383,6 +383,7 @@ enum power_supply_property {
 	POWER_SUPPLY_PROP_QUICK_CHARGE_TYPE,
 	POWER_SUPPLY_PROP_TX_ADAPTER,
 	POWER_SUPPLY_PROP_SIGNAL_STRENGTH,
+	POWER_SUPPLY_PROP_REVERSE_CHG_MODE,
 	/*
 	 * Add local extensions for properties with string values between
 	 * MODEL_NAME and SERIAL_NUMBER. Don't add below SERIAL_NUMBER.
