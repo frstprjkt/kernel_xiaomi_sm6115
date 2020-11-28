@@ -147,3 +147,6 @@ clang/
 gcc/
 gcc32/
 gcc64/
+
+# Object directory
+out/
