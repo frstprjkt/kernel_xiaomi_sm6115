@@ -1,0 +1,18 @@
+version: 2.1
+
+jobs:
+  compile:
+    docker:
+      - image: ubuntu:rolling
+    steps:
+      - run:
+          name: "Starting compile..."
+          command: |
+            git clone --depth=1 https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}
+            cd ${CIRCLE_PROJECT_REPONAME}
+            bash build.sh
+
+workflows:
+  compiling:
+    jobs:
+      - compile
