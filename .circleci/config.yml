@@ -7,7 +7,10 @@ jobs:
     steps:
       - run:
           name: "Running build setup script..."
-          command: "git clone https://github.com/escawet-esc/android_build_environment .sc && bash .sc/setup.sh"
+          command: |
+            apt install git -y
+            git clone https://github.com/escawet-esc/android_build_environment .sc
+            bash .sc/setup.sh
 
       - run:
           name: "Starting compile..."
