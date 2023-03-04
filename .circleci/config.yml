@@ -10,8 +10,8 @@ jobs:
           command: |
             apt update && apt upgrade -y
             apt install git wget sudo curl lsb-release -y
-            git clone https://github.com/escawet-esc/android_build_environment .sc
-            bash .sc/setup.sh
+            git clone https://github.com/escawet-esc/android_build_environment
+            bash android_build_environment/setup.sh
 
       - run:
           name: "Starting compile..."
