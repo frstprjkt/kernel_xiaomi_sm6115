@@ -8,7 +8,7 @@ jobs:
       - run:
           name: "Running build setup script..."
           command: |
-            apt update && apt upgrade
+            apt update && apt upgrade -y
             apt install git -y
             git clone https://github.com/escawet-esc/android_build_environment .sc
             bash .sc/setup.sh
