@@ -9,7 +9,7 @@ jobs:
           name: "Running build setup script..."
           command: |
             apt update && apt upgrade -y
-            apt install git wget -y
+            apt install git wget sudo curl lsb-release -y
             git clone https://github.com/escawet-esc/android_build_environment .sc
             bash .sc/setup.sh
 
