@@ -6,6 +6,10 @@ jobs:
       - image: ubuntu:rolling
     steps:
       - run:
+          name: "Running build setup script..."
+          command: "git clone https://github.com/escawet-esc/android_build_environment .sc && bash .sc/setup.sh"
+
+      - run:
           name: "Starting compile..."
           command: |
             git clone --depth=1 https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}
