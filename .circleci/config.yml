@@ -1,0 +1,26 @@
+version: 2.1
+
+jobs:
+  compile:
+    docker:
+      - image: ubuntu:rolling
+    steps:
+      - run:
+          name: "Running build setup script..."
+          command: |
+            apt update && apt upgrade -y
+            apt install git wget sudo curl lsb-release -y
+            git clone https://github.com/escawet-esc/android_build_environment
+            bash android_build_environment/setup.sh
+
+      - run:
+          name: "Starting compile..."
+          command: |
+            git clone --depth=1 https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}
+            cd ${CIRCLE_PROJECT_REPONAME}
+            bash build.sh
+
+workflows:
+  compiling:
+    jobs:
+      - compile
