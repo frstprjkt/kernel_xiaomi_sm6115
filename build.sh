@@ -8,13 +8,13 @@ IMAGE=$(pwd)/out/arch/arm64/boot/Image
 export ARCH=arm64
 export SUBARCH=arm64
 
-# Build information
-export KBUILD_BUILD_HOST=frostedarch
-export KBUILD_BUILD_USER="shiina"
-
 # Device information
 export CODENAME="SM6115"
 export DEVICE="Xiaomi SM6115 platform"
+
+# Source information
+export BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+export LAST_COMMIT="$(git log --pretty=format:'%h: %s' -1)"
 
 # Function environment
 function post_msg() {
@@ -44,7 +44,7 @@ if [ -a "$(pwd)/gcc*" ]; then
 fi
 
 # Notify kernel compilation started
-post_msg "<b>Katana Kernel Compilation Started</b>%0Aby the <b>frostedscape.</b> org%0A%0A<b>Host OS: </b><code>$(lsb_release -d | cut -d ':' -f 2 | sed -e 's/^[[:space:]]*//')</code>%0A<b>Kernel version: </b><code>$(make kernelversion)</code>%0A<b>Build date: </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device: </b><code>$DEVICE [$CODENAME]</code>%0A<b>Hostname: </b><code>$KBUILD_BUILD_HOST</code>%0A<b>Host core count: </b><code>$(nproc --all)</code>%0A<b>Compiler used: </b><code>$($(pwd)/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')</code>%0A<b>Branch: </b><code>$(git rev-parse --abbrev-ref HEAD)</code>%0A<b>Last commit: </b><code>$(git log --pretty=format:'%h: %s' -1)</code>%0A%0A#katana #$CODENAME"
+post_msg "<b>Katana Kernel Compilation Started</b>%0Aby the <b>frostedscape.</b> org%0A%0A<b>Host OS: </b><code>$(lsb_release -d | cut -d ':' -f 2 | sed -e 's/^[[:space:]]*//')</code>%0A<b>Kernel version: </b><code>$(make kernelversion | grep 4.19)</code>%0A<b>Build date: </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device: </b><code>$DEVICE [$CODENAME]</code>%0A<b>Hostname: </b><code>$KBUILD_BUILD_HOST</code>%0A<b>Host core count: </b><code>$(nproc --all)</code>%0A<b>Compiler used: </b><code>$($(pwd)/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')</code>%0A<b>Branch: </b><code>$BRANCH</code>%0A<b>Last commit: </b><code>$LAST_COMMIT</code>%0A%0A#katana #$CODENAME"
 
 # Cleanup before compiling
 rm -f AnyKernel3/Image
@@ -55,12 +55,12 @@ rm -f out/build_log.txt
 make O=out ARCH=arm64 CC=clang $DEFCONFIG
 make -j$(nproc --all) \
 	O=out \
-    ARCH=arm64 \
-    CC=clang \
-    CLANG_TRIPLE=aarch64-linux-gnu- \
-    CROSS_COMPILE=aarch64-linux-gnu- \
-    CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-    2>&1 | tee out/build_log.txt
+	ARCH=arm64 \
+	CC=clang \
+	CLANG_TRIPLE=aarch64-linux-gnu- \
+	CROSS_COMPILE=aarch64-linux-gnu- \
+	CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
+	2>&1 | tee out/build_log.txt
 
 if ! [ -a "$IMAGE" ]; then
 	post_msg "Compile failed. Check build log below!!!"
@@ -77,7 +77,7 @@ mv $IMAGE AnyKernel3
 
 # Compress AnyKernel3 into zip
 cd AnyKernel3
-zip -r9 katana-$CODENAME-$(date +%d%H%M).zip .
+zip -r9 katana-$BRANCH-$CODENAME-$(date +%d%H%M).zip .
 cd ..
 
 # Upload kernel zip
