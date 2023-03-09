@@ -16,7 +16,7 @@ jobs:
       - run:
           name: "Starting compile..."
           command: |
-            git clone --depth=1 https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}
+            git clone --depth=1 https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} -b ${CIRCLE_PROJECT_BRANCH}
             cd ${CIRCLE_PROJECT_REPONAME}
             bash build.sh
 
